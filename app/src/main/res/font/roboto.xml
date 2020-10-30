@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font app:fontStyle="normal" app:fontWeight="400" app:font="@font/robotoregular"/>
+    <font app:fontStyle="normal" app:fontWeight="400" app:font="@font/robotolight"/>
+    <font app:fontStyle="normal" app:fontWeight="400" app:font="@font/robotoblack"/>
+    <font app:fontStyle="normal" app:fontWeight="400" app:font="@font/robotobold"/>
+    <font app:fontStyle="normal" app:fontWeight="400" app:font="@font/robotomedium"/>
+    <font app:fontStyle="normal" app:fontWeight="400" app:font="@font/robotothin"/>
+</font-family>

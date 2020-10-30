@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Água e Gás</string>
+
+    <!-- main-activity -->
+    <string name="atv_main_aguaegas">Água e Gás.</string>
+    <string name="atv_main_simpleserapido">Simples e rápido.</string>
+    <string name="atv_main_entrarcomgoogle">Entrar com Google</string>
+    <string name="atv_main_sairdoapp">Sair do aplicativo</string>
+
+</resources>
