@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Água e Gás</string>
+    <string name="app_name_commercial">Água &amp; Gás</string>
 
     <!-- main-activity -->
     <string name="atv_main_aguaegas">Água e Gás.</string>
@@ -7,4 +8,10 @@
     <string name="atv_main_entrarcomgoogle">Entrar com Google</string>
     <string name="atv_main_sairdoapp">Sair do aplicativo</string>
 
+
+    <!-- choose_user_type -->
+    <string name="iv_choose_user_type">Selecione o tipo de usuário</string>
+    <string name="user">Usuário</string>
+    <string name="provider">Fornecedor</string>
+    <string name="go_back">Voltar</string>
 </resources>
