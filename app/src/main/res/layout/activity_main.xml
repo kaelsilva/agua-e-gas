@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".MainActivity">
 
     <Button
@@ -15,7 +15,9 @@
         android:background="@color/colorAccentDark"
         android:fontFamily="@font/robotomedium"
         android:gravity="center|end"
+        android:paddingStart="60dp"
         android:paddingLeft="60dp"
+        android:paddingEnd="20dp"
         android:paddingRight="20dp"
         android:text="@string/atv_main_sairdoapp"
         android:textAppearance="@style/customfontstyleroboto"
@@ -24,16 +26,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_btn_entrarcomgoogle"
-        android:paddingStart="60dp"
-        android:paddingEnd="20dp"  />
+        app:layout_constraintTop_toBottomOf="@+id/main_btn_entrarcomgoogle" />
 
     <view
         android:id="@+id/v_titleBar"
         class="android.support.v7.widget.ActionMenuView"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="@color/colorPrimary"
+        android:background="#144A7B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/v_titleBar"
         app:layout_constraintVertical_bias="0.551"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/main_tv_title"
@@ -55,12 +55,12 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/pacificoregular"
         android:text="@string/app_name"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/colorBackground"
         android:textIsSelectable="false"
         android:textSize="44sp"
         app:layout_constraintBottom_toBottomOf="@+id/v_titleBar"
         app:layout_constraintEnd_toEndOf="@+id/v_titleBar"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_img_logo"
         app:layout_constraintTop_toTopOf="@+id/v_titleBar" />
 
     <TextView
@@ -71,6 +71,7 @@
         android:fontFamily="@font/robotobold"
         android:text="@string/atv_main_aguaegas"
         android:textAppearance="@style/customfontstyleroboto"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -85,6 +86,7 @@
         android:fontFamily="@font/robotobold"
         android:text="@string/atv_main_simpleserapido"
         android:textAppearance="@style/customfontstyleroboto"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -99,7 +101,9 @@
         android:background="@color/colorAccent"
         android:fontFamily="@font/robotomedium"
         android:gravity="center|end"
+        android:paddingStart="60dp"
         android:paddingLeft="60dp"
+        android:paddingEnd="20dp"
         android:paddingRight="20dp"
         android:text="@string/atv_main_entrarcomgoogle"
         android:textAppearance="@style/customfontstyleroboto"
@@ -108,35 +112,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_tv_simpleserapido"
-        android:paddingStart="60dp"
-        android:paddingEnd="20dp" />
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_simpleserapido" />
 
     <ImageView
         android:id="@+id/main_img_google"
-        android:layout_width="51dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:adjustViewBounds="false"
         android:contentDescription="@string/atv_main_entrarcomgoogle"
+        android:cropToPadding="false"
         android:elevation="@android:dimen/app_icon_size"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="@+id/main_btn_entrarcomgoogle"
         app:layout_constraintStart_toStartOf="@+id/main_btn_entrarcomgoogle"
         app:layout_constraintTop_toTopOf="@+id/main_btn_entrarcomgoogle"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:srcCompat="@drawable/googleuicon" />
 
     <ImageView
         android:id="@+id/main_img_sair"
-        android:layout_width="51dp"
-        android:layout_height="0dp"
+        android:layout_width="40dp"
+        android:layout_height="39dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:contentDescription="@string/atv_main_sairdoapp"
         android:elevation="@android:dimen/app_icon_size"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="@+id/main_btn_sairdoapp"
         app:layout_constraintStart_toStartOf="@+id/main_btn_sairdoapp"
         app:layout_constraintTop_toTopOf="@+id/main_btn_sairdoapp"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:srcCompat="@drawable/arrowleft" />
 
 </android.support.constraint.ConstraintLayout>
