@@ -14,4 +14,11 @@
     <string name="user">Usuário</string>
     <string name="provider">Fornecedor</string>
     <string name="go_back">Voltar</string>
+
+    <!-- customer_chooser_service -->
+    <string name="choose_now">Solicitar agora:</string>
+    <string name="water">Água</string>
+    <string name="gas">Gás</string>
+    <string name="logout">Sair da conta</string>
+    <string name="close">Fechar app</string>
 </resources>
