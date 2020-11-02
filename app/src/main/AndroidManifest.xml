@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.SelectUser" ></activity>
+        <activity android:name=".View.ChooseService" ></activity>
     </application>
 
 </manifest>
