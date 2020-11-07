@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +8,7 @@
 
     <view
         android:id="@+id/v_titleBar"
-        class="android.support.v7.widget.ActionMenuView"
+        class="androidx.appcompat.widget.ActionMenuView"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:background="#144A7B"
@@ -92,7 +92,7 @@
 
     <view
         android:id="@+id/iv_choose_user"
-        class="android.support.v7.widget.AppCompatImageView"
+        class="androidx.appcompat.widget.AppCompatImageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="24dp"
@@ -104,7 +104,7 @@
 
     <view
         android:id="@+id/iv_choose_provider"
-        class="android.support.v7.widget.AppCompatImageView"
+        class="androidx.appcompat.widget.AppCompatImageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginEnd="24dp"
@@ -113,4 +113,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/v_titleBar"
         app:layout_constraintVertical_bias="0.501" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

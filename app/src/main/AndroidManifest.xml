@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".View.SelectUser" ></activity>
         <activity android:name=".View.ChooseService" ></activity>
+        <activity android:name=".View.MapWaterCustomer"></activity>
+        <activity android:name=".View.WaterProviders"></activity>
     </application>
 
 </manifest>
