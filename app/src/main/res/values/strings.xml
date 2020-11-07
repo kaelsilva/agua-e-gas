@@ -21,4 +21,11 @@
     <string name="gas">Gás</string>
     <string name="logout">Sair da conta</string>
     <string name="close">Fechar app</string>
+
+    <!-- list_water_providers -->
+    <string name="search">BUSCAR</string>
+    <string name="state">Estado:</string>
+    <string name="city">Cidade:</string>
+    <string name="distance">Distância:</string>
+    <string name="search_detail">Detalhes da busca</string>
 </resources>
