@@ -28,4 +28,14 @@
     <string name="city">Cidade:</string>
     <string name="distance">Distância:</string>
     <string name="search_detail">Detalhes da busca</string>
+
+    <!-- orders_list -->
+    <string name="orders">Pedidos:</string>
+
+    <!-- provider_menu -->
+    <string name="settings">Configurações</string>
+    <string name="seeFinishedOrders">Ver pedidos finalizados</string>
+    <string name="seePendentOrders">Ver pedidos pendentes</string>
+    <string name="menuPrincipal">Menu principal</string>
+    <string name="refresh">Recarregar</string>
 </resources>
