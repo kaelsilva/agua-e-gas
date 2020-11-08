@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import br.com.touchsoul.aguaegas.R;
 
 public class SelectUser extends AppCompatActivity {
-    private ImageView backBtn, userBtn;
+    private ImageView backBtn, userBtn, providerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,8 @@ public class SelectUser extends AppCompatActivity {
 
     public void buttonConfig(){
         backBtn = findViewById(R.id.btn_back);
+        userBtn = findViewById(R.id.iv_choose_user);
+        providerBtn = findViewById(R.id.iv_choose_provider);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,13 +31,18 @@ public class SelectUser extends AppCompatActivity {
             }
         });
 
-        userBtn = findViewById(R.id.iv_choose_user);
-
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //finish();
                 startActivity(new Intent(getApplicationContext(), ChooseService.class));
+            }
+        });
+
+        providerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ProviderMenu.class));
             }
         });
     }
