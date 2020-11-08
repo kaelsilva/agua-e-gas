@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/robotobold"
-        android:text="Menu principal"
+        android:text="@string/menuPrincipal"
         android:textAppearance="@style/customfontstyleroboto"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,10 +58,12 @@
     <Button
         android:id="@+id/btn_view_orders"
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:fontFamily="@font/robotobold"
-        android:text="Ver pedidos"
+        android:fontFamily="@font/robotomedium"
+        android:text="@string/seePendentOrders"
+        android:textAllCaps="false"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,11 +72,29 @@
     <Button
         android:id="@+id/btn_configurations"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/robotobold"
-        android:text="Configurações"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/robotomedium"
+        android:text="@string/settings"
+        android:textAllCaps="false"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_view_completed_orders" />
+
+    <Button
+        android:id="@+id/btn_view_completed_orders"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/robotomedium"
+        android:text="@string/seeFinishedOrders"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_view_orders" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
