@@ -22,6 +22,7 @@
         <activity android:name=".View.ChooseService" ></activity>
         <activity android:name=".View.MapWaterCustomer"></activity>
         <activity android:name=".View.WaterProviders"></activity>
+        <activity android:name=".View.ProviderMenu"></activity>
     </application>
 
 </manifest>
