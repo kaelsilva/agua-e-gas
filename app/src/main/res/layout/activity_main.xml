@@ -11,7 +11,7 @@
         android:id="@+id/main_btn_sairdoapp"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:background="@color/colorAccentDark"
         android:fontFamily="@font/robotomedium"
         android:gravity="center|end"
@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_btn_entrarcomgoogle" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_button" />
 
     <view
         android:id="@+id/v_titleBar"
@@ -93,43 +93,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_tv_aguaegas" />
 
-    <Button
-        android:id="@+id/main_btn_entrarcomgoogle"
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:background="@color/colorAccent"
-        android:fontFamily="@font/robotomedium"
-        android:gravity="center|end"
-        android:paddingStart="60dp"
-        android:paddingLeft="60dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:text="@string/atv_main_entrarcomgoogle"
-        android:textAppearance="@style/customfontstyleroboto"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_tv_simpleserapido" />
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_simpleserapido" >
 
-    <ImageView
-        android:id="@+id/main_img_google"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:adjustViewBounds="false"
-        android:contentDescription="@string/atv_main_entrarcomgoogle"
-        android:cropToPadding="false"
-        android:elevation="@android:dimen/app_icon_size"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="@+id/main_btn_entrarcomgoogle"
-        app:layout_constraintStart_toStartOf="@+id/main_btn_entrarcomgoogle"
-        app:layout_constraintTop_toTopOf="@+id/main_btn_entrarcomgoogle"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/googleuicon" />
+    </com.google.android.gms.common.SignInButton>
 
     <ImageView
         android:id="@+id/main_img_sair"
