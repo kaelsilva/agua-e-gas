@@ -116,6 +116,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/main_btn_sairdoapp"
         app:layout_constraintStart_toStartOf="@+id/main_btn_sairdoapp"
         app:layout_constraintTop_toTopOf="@+id/main_btn_sairdoapp"
-        app:srcCompat="@drawable/arrowleft" />
+        app:srcCompat="@drawable/logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

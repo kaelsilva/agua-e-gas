@@ -33,7 +33,7 @@ public class ChooseService extends AppCompatActivity {
         btn_water.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), WaterProviders.class));
+                startActivity(new Intent(getApplicationContext(), MapWaterCustomer.class));
             }
         });
     }
