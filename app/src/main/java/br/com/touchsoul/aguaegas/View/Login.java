@@ -23,6 +23,8 @@ public class Login extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 0;
 
+    private GoogleSignInAccount account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,12 @@ public class Login extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        account = GoogleSignIn.getLastSignedInAccount(this);
+
+        if (account != null){
+            startActivity(new Intent(this, ChooseService.class));
+        }
     }
 
     @Override
@@ -65,6 +73,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                finishAffinity();
+                System.exit(0);
             }
         });
     }
