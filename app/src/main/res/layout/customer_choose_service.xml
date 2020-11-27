@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/logout" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/btn_close_app"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
@@ -95,9 +95,9 @@
         android:layout_height="153dp"
         android:contentDescription="@string/gas"
         android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="@+id/view4"
-        app:layout_constraintStart_toStartOf="@+id/view4"
-        app:layout_constraintTop_toTopOf="@+id/view4"
+        app:layout_constraintEnd_toEndOf="@+id/btn_gas"
+        app:layout_constraintStart_toStartOf="@+id/btn_gas"
+        app:layout_constraintTop_toTopOf="@+id/btn_gas"
         app:srcCompat="@drawable/botijao_black" />
 
     <TextView
@@ -113,14 +113,15 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <view
-        android:id="@+id/view4"
+        android:id="@+id/btn_gas"
         class="androidx.appcompat.widget.AppCompatImageButton"
         android:layout_width="160dp"
         android:layout_height="180dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
-        android:visibility="invisible"
+        android:background="#00FFFFFF"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
