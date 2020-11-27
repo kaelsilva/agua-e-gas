@@ -78,7 +78,7 @@ public class SelectUser extends AppCompatActivity {
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //finish();
+                finish();
                 startActivity(new Intent(getApplicationContext(), ChooseService.class));
             }
         });
@@ -86,6 +86,7 @@ public class SelectUser extends AppCompatActivity {
         providerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 startActivity(new Intent(getApplicationContext(), ProviderMenu.class));
             }
         });
