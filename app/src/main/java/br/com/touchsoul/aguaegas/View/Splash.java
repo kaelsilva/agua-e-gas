@@ -17,6 +17,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,11 +29,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import br.com.touchsoul.aguaegas.Model.User;
+import br.com.touchsoul.aguaegas.Model.VolleyCallBack;
 import br.com.touchsoul.aguaegas.R;
 
 public class Splash extends AppCompatActivity implements Runnable {
 
     private GoogleSignInAccount account;
+    private JSONObject obj;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,6 @@ public class Splash extends AppCompatActivity implements Runnable {
         Handler h = new Handler();
         h.postDelayed(this, 3000);
 
-        conectar();
 
 
     }
@@ -50,37 +56,67 @@ public class Splash extends AppCompatActivity implements Runnable {
         account = GoogleSignIn.getLastSignedInAccount(this);
 
         if (account != null){
-            startActivity(new Intent(this, ChooseService.class));
+            if (isAlreadyRegistered(account, new VolleyCallBack() {
+                @Override
+                public void onSuccess() {
+                    if (user.getUsertype() == 1){
+                        startActivity(new Intent(getApplicationContext(), ChooseService.class));
+                        finish();
+                    } else if (user.getUsertype() == 2){
+                        startActivity(new Intent(getApplicationContext(), ProviderMenu.class));
+                        finish();
+                    }
+                }
+            }));
+        } else {
+            startActivity(new Intent(this, Login.class));
             finish();
         }
-
-        startActivity(new Intent(this, Login.class));
-        finish();
     }
 
-    public void conectar(){
+    public boolean isAlreadyRegistered(GoogleSignInAccount account, final VolleyCallBack callBack){
+        final boolean[] result = new boolean[1];
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://192.168.0.129:3000/users?id=eq.1";
+        String url ="http://192.168.0.129:3000/users?googleid=eq."+account.getId();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Toast.makeText(Splash.this, "Resposta: "+response,
-                                Toast.LENGTH_LONG).show();
+                        if (response.equals("[]")){
+                            result[0] = false;
+                        } else {
+                            try {
+                                obj = new JSONObject(response.substring(1, response.length()-1));
+                                user = new User(
+                                            obj.getString("googleid"),
+                                            obj.getString("name"),
+                                            obj.getString("email"
+                                        ));
+                                user.setUsertype(Integer.parseInt(obj.getString("usertype")));
+                                result[0] = true;
+                                callBack.onSuccess();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(Splash.this, "Erro: "+e,
+                                        Toast.LENGTH_LONG).show();
+                            }
+
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Splash.this, "Erro: "+error.toString(),
                         Toast.LENGTH_LONG).show();
+                result[0] = false;
             }
         });
-
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+
+        return result[0];
     }
 }
