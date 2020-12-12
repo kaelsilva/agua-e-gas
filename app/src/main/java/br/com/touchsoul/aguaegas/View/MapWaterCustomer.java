@@ -18,7 +18,15 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +39,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import br.com.touchsoul.aguaegas.Model.User;
+import br.com.touchsoul.aguaegas.Model.VolleyCallBack;
 import br.com.touchsoul.aguaegas.R;
 
 public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCallback {
@@ -46,13 +62,15 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     private final LatLng defaultLocation = new LatLng(-33.8523341, 151.2106085);
-    private static final int DEFAULT_ZOOM = 17;
+    private static final int DEFAULT_ZOOM = 1;
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private Location lastKnownLocation;
 
     private static final String TAG = MapWaterCustomer.class.getSimpleName();
+
+    private ArrayList<User> providers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +103,7 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
         try {
@@ -98,6 +116,26 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
             }
+
+
+
+
+            if (areProvidersAvailable(new VolleyCallBack() {
+                @Override
+                public void onSuccess() {
+                    for (User provider : providers) {
+                        googleMap.addMarker(new MarkerOptions()
+                                .position(
+                                        new LatLng(
+                                                provider.getLatitude(),
+                                                provider.getLongitude()
+                                        )
+                                )
+                                .title("" + provider.getName()));
+                    }
+                }
+            }));
+
         } catch (Resources.NotFoundException e) {
             Log.e(TAG, "Can't find style. Error: ", e);
         }
@@ -210,6 +248,61 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
                 finish();
             }
         });
+    }
+
+    public boolean areProvidersAvailable(final VolleyCallBack callBack){
+        final boolean[] result = new boolean[1];
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://192.168.0.129:3000/users?usertype=eq.2";
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.equals("[]")){
+                            result[0] = false;
+                        } else {
+                            try {
+                                JSONArray obj;
+                                obj = new JSONArray(response);
+                                providers = new ArrayList<>();
+                                User provider;
+                                for (int i = 0; i < obj.length(); i++){
+                                    provider = new User(
+                                                obj.getJSONObject(i).getString("googleid"),
+                                                obj.getJSONObject(i).getString("name"),
+                                                obj.getJSONObject(i).getString("email")
+                                    );
+                                    provider.setUsertype(obj.getJSONObject(i).getInt("usertype"));
+                                    provider.setLatitude(obj.getJSONObject(i).getDouble("latitude"));
+                                    provider.setLongitude(obj.getJSONObject(i).getDouble("longitude"));
+
+                                    providers.add(provider);
+
+                                }
+                                result[0] = true;
+                                callBack.onSuccess();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(MapWaterCustomer.this, "Erro: "+e,
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MapWaterCustomer.this, "Erro: "+error.toString(),
+                        Toast.LENGTH_LONG).show();
+                result[0] = false;
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+        return result[0];
     }
 }
 
