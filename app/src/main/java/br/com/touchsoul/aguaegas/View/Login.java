@@ -25,6 +25,8 @@ import com.google.android.gms.tasks.Task;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.com.touchsoul.aguaegas.Model.User;
+import br.com.touchsoul.aguaegas.Model.VolleyCallBack;
 import br.com.touchsoul.aguaegas.R;
 
 public class Login extends AppCompatActivity {
@@ -36,7 +38,7 @@ public class Login extends AppCompatActivity {
     private GoogleSignInAccount account;
 
     private JSONObject obj;
-    private int usertype;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,15 +109,22 @@ public class Login extends AppCompatActivity {
 
             if (account != null){
                 // Signed in successfully, show authenticated UI.
-                if (isAlreadyRegistered(account)){
-                    if (usertype == 1){
-                        startActivity(new Intent(getApplicationContext(), ChooseService.class));
-                    } else if (usertype == 2){
-                        startActivity(new Intent(getApplicationContext(), ProviderMenu.class));
-                    }
-                } else {
-                    startActivity(new Intent(getApplicationContext(), SelectUser.class));
-                }
+                if (isAlreadyRegistered(account, new VolleyCallBack() {
+
+                            @Override
+                            public void onSuccess() {
+                                // this is where you will call the geofire, here you have the response from the volley.final VolleyCallBack callBack
+                                if (user.getUsertype() == 1) {
+                                    startActivity(new Intent(getApplicationContext(), ChooseService.class));
+                                    finish();
+                                } else if (user.getUsertype() == 2) {
+                                    startActivity(new Intent(getApplicationContext(), ProviderMenu.class));
+                                    finish();
+                                } else {
+                                    startActivity(new Intent(getApplicationContext(), SelectUser.class));
+                                }
+                            }
+                }));
             }
 
             //startActivity(new Intent(getApplicationContext(), SelectUser.class));
@@ -133,7 +142,7 @@ public class Login extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    public boolean isAlreadyRegistered(GoogleSignInAccount account){
+    public boolean isAlreadyRegistered(GoogleSignInAccount account, final VolleyCallBack callBack){
         final boolean[] result = new boolean[1];
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -148,11 +157,19 @@ public class Login extends AppCompatActivity {
                             result[0] = false;
                         } else {
                             try {
-                                obj = new JSONObject(response);
-                                usertype = obj.getInt("usertype");
+                                obj = new JSONObject(response.substring(1, response.length()-1));
+                                user = new User(
+                                            obj.getString("googleid"),
+                                            obj.getString("name"),
+                                            obj.getString("email"
+                                        ));
+                                user.setUsertype(Integer.parseInt(obj.getString("usertype")));
                                 result[0] = true;
+                                callBack.onSuccess();
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                Toast.makeText(Login.this, "Erro: "+e,
+                                        Toast.LENGTH_LONG).show();
                             }
 
                         }
@@ -165,7 +182,6 @@ public class Login extends AppCompatActivity {
                 result[0] = false;
             }
         });
-
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
