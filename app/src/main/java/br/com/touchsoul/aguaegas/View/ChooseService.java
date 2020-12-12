@@ -86,6 +86,7 @@ public class ChooseService extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(ChooseService.this, "Deslogado com sucesso!",
                                 Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(), Login.class));
                         finish();
                     }
                 });
