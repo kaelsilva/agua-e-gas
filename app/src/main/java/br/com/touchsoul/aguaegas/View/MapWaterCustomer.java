@@ -35,6 +35,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -62,7 +63,7 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     private final LatLng defaultLocation = new LatLng(-33.8523341, 151.2106085);
-    private static final int DEFAULT_ZOOM = 1;
+    private static final int DEFAULT_ZOOM = 15;
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
@@ -89,7 +90,6 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapa);
         mapFragment.getMapAsync(this);
-
     }
 
     /**
@@ -123,16 +123,37 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
             if (areProvidersAvailable(new VolleyCallBack() {
                 @Override
                 public void onSuccess() {
-                    for (User provider : providers) {
-                        googleMap.addMarker(new MarkerOptions()
-                                .position(
-                                        new LatLng(
+                    final ArrayList<Marker> markerArrayList = new ArrayList<>();
+                    for (final User provider : providers) {
+                        markerArrayList.add(mMap.addMarker(new MarkerOptions()
+                                        .position(
+                                            new LatLng(
                                                 provider.getLatitude(),
                                                 provider.getLongitude()
+                                            )
                                         )
-                                )
-                                .title("" + provider.getName()));
+                                        .title(provider.getName())));
+
+
+
                     }
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            for (User provider : providers) {
+                                if (marker.getTitle().equals(provider.getName())) {
+                                    Intent i = new Intent(getApplicationContext(), ProviderDetail.class);
+                                    i.putExtra("id", provider.getId());
+                                    i.putExtra("googleid", provider.getGoogleid());
+                                    i.putExtra("name", provider.getName());
+                                    i.putExtra("email", provider.getEmail());
+                                    startActivity(i);
+                                    break;
+                                }
+                            }
+                            return false;
+                        }
+                    });
                 }
             }));
 
@@ -248,13 +269,15 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
                 finish();
             }
         });
+
+
     }
 
     public boolean areProvidersAvailable(final VolleyCallBack callBack){
         final boolean[] result = new boolean[1];
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://192.168.0.129:3000/users?usertype=eq.2";
+        String url = getResources().getString(R.string.server_ip)+"/users?usertype=eq.2";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -275,6 +298,7 @@ public class MapWaterCustomer extends AppCompatActivity implements OnMapReadyCal
                                                 obj.getJSONObject(i).getString("name"),
                                                 obj.getJSONObject(i).getString("email")
                                     );
+                                    provider.setId(obj.getJSONObject(i).getInt("id"));
                                     provider.setUsertype(obj.getJSONObject(i).getInt("usertype"));
                                     provider.setLatitude(obj.getJSONObject(i).getDouble("latitude"));
                                     provider.setLongitude(obj.getJSONObject(i).getDouble("longitude"));
