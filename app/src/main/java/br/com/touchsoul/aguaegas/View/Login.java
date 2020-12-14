@@ -1,6 +1,8 @@
 package br.com.touchsoul.aguaegas.View;
 
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
@@ -122,9 +125,12 @@ public class Login extends AppCompatActivity {
                                     finish();
                                 } else {
                                     startActivity(new Intent(getApplicationContext(), SelectUser.class));
+                                    finish();
                                 }
                             }
-                }));
+                })){} else {
+                    startActivity(new Intent(this, SelectUser.class));
+                };
             }
 
             //startActivity(new Intent(getApplicationContext(), SelectUser.class));
@@ -186,5 +192,16 @@ public class Login extends AppCompatActivity {
         queue.add(stringRequest);
 
         return result[0];
+    }
+
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(Login.this, "Deslogado com sucesso!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }

@@ -38,4 +38,7 @@
     <string name="seePendentOrders">Ver pedidos pendentes</string>
     <string name="menuPrincipal">Menu principal</string>
     <string name="refresh">Recarregar</string>
+
+    <!-- Server IP -->
+    <string name="server_ip">http://192.168.0.129:3000</string>
 </resources>

@@ -68,6 +68,8 @@ public class Splash extends AppCompatActivity implements Runnable {
                     }
                 }
             }));
+            startActivity(new Intent(this, Login.class));
+            finish();
         } else {
             startActivity(new Intent(this, Login.class));
             finish();
