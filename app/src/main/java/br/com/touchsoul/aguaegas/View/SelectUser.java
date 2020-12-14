@@ -93,7 +93,7 @@ public class SelectUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    Toast.makeText(SelectUser.this, "Vai fazer o POST",
+                    Toast.makeText(SelectUser.this, "Cliente criado.",
                             Toast.LENGTH_SHORT).show();
                     register(new JSONObject("{\"googleid\": \""+acct.getId()+"\"," +
                                             "\"name\": \""+acct.getDisplayName()+"\"," +
@@ -115,6 +115,21 @@ public class SelectUser extends AppCompatActivity {
         providerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    Toast.makeText(SelectUser.this, "Fornecedor criado.",
+                            Toast.LENGTH_SHORT).show();
+                    register(new JSONObject("{\"googleid\": \""+acct.getId()+"\"," +
+                            "\"name\": \""+acct.getDisplayName()+"\"," +
+                            "\"email\": \""+acct.getEmail()+"\"," +
+                            "\"usertype\": \"2\"," +
+                            "\"latitude\": \"0\"," +
+                            "\"longitude\": \"0\"" +
+                            "}"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(SelectUser.this, "Erro no POST: "+e.toString(),
+                            Toast.LENGTH_LONG).show();
+                }
                 finish();
                 startActivity(new Intent(getApplicationContext(), ProviderMenu.class));
             }
@@ -132,6 +147,8 @@ public class SelectUser extends AppCompatActivity {
         params.put("name", jsonObj.getString("name"));
         params.put("email", jsonObj.getString("email"));
         params.put("usertype", jsonObj.getString("usertype"));
+        params.put("latitude", jsonObj.getString("latitude"));
+        params.put("longitude", jsonObj.getString("longitude"));
 
         // Request a string response from the provided URL.
         JsonObjectRequest jsonRequest = new JsonObjectRequest(url, new JSONObject(params),
