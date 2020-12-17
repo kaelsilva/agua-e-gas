@@ -100,7 +100,7 @@ public class ProviderDetail extends AppCompatActivity {
     public void register(final JSONObject jsonObj) throws JSONException {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://192.168.0.129:3000/users";
+        String url = getResources().getString(R.string.server_ip)+"/users";
 
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
@@ -137,7 +137,7 @@ public class ProviderDetail extends AppCompatActivity {
         final String[] result = new String[1];
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://192.168.0.129:3000/prices?providerid=eq."+provider.getId();
+        String url = getResources().getString(R.string.server_ip)+"/prices?providerid=eq."+provider.getId();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
