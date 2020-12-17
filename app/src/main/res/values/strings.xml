@@ -40,5 +40,5 @@
     <string name="refresh">Recarregar</string>
 
     <!-- Server IP -->
-    <string name="server_ip">http://192.168.0.129:3000</string>
+    <string name="server_ip"></string>
 </resources>

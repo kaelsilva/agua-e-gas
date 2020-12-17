@@ -1,5 +1,6 @@
 package br.com.touchsoul.aguaegas.View;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -74,24 +75,24 @@ public class ProviderSettings extends AppCompatActivity {
             public void onSuccess() {
                 UIconfig();
             }
-        }));
+        })) ;
     }
 
-    public void UIconfig(){
+    public void UIconfig() {
         EditText et_provider_name = findViewById(R.id.et_provider_name);
         et_provider_name.setText(provider.getName());
 
         setUsertypeChecks();
     }
 
-    public void setUsertypeChecks(){
+    public void setUsertypeChecks() {
         CheckBox cb_water, cb_gas;
         cb_water = findViewById(R.id.cb_water);
         cb_gas = findViewById(R.id.cb_gas);
 
-        if (provider.getUsertype() == 2){
+        if (provider.getUsertype() == 2) {
             cb_water.setChecked(true);
-        } else if (provider.getUsertype() == 3){
+        } else if (provider.getUsertype() == 3) {
             cb_gas.setChecked(true);
         } else {
             cb_water.setChecked(true);
@@ -99,7 +100,7 @@ public class ProviderSettings extends AppCompatActivity {
         }
     }
 
-    public void buttonConfig(){
+    public void buttonConfig() {
         btnBack = findViewById(R.id.btn_back);
         btnSave = findViewById(R.id.btn_save);
         btnUpdateLocation = findViewById(R.id.btn_update_location);
@@ -119,7 +120,17 @@ public class ProviderSettings extends AppCompatActivity {
                 cb_water = findViewById(R.id.cb_water);
                 cb_gas = findViewById(R.id.cb_gas);
 
-                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
                 Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
                 provider.setName(et_provider_name.getText().toString());

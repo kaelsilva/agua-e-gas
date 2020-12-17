@@ -152,7 +152,7 @@ public class Login extends AppCompatActivity {
         final boolean[] result = new boolean[1];
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://192.168.0.129:3000/users?googleid=eq."+account.getId();
+        String url = getResources().getString(R.string.server_ip)+"/users?googleid=eq."+account.getId();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
