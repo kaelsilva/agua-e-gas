@@ -10,3 +10,6 @@ Em outras palavras, caso alguém deseje utilizar este repositório, será necess
 Neste projeto, a base de dados utilizada PostgreSQL.  
 Para gerar a API, encontrei uma excelente ferramenta, o <a href="https://github.com/PostgREST/postgrest" target="_blank">PostgREST</a>, que acelerou bastante o desenvolvimento do app.  
 Caso necessite de detalhes sobre tabelas do banco de dados, entre em contato.
+
+## Screenshots
+<img src="https://i.imgur.com/wGNfhjM.png" width="102" height="214" /> <img src="https://i.imgur.com/WnLS1CB.png" width="102" height="214" /> <img src="https://i.imgur.com/7v4dioj.png" width="102" height="214" /> <img src="https://i.imgur.com/2M5VGGP.png" width="102" height="214" />
